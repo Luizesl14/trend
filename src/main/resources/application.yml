@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: Trent
+
+jwt:
+  secret: suaChaveSecretaMuitoLongaParaAssinarTokensJWT123456789
+  expiration: 86400000
