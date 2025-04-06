@@ -1,4 +1,4 @@
-package br.com.trend.infrastructure.adapter
+package br.com.trend.infrastructure.port
 
 interface IPort<T>{
 

@@ -5,6 +5,7 @@ import br.com.trend.application.shared.service.IUserService
 import br.com.trend.model.user.User
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Mono
 
 @Service
 class UserService(
@@ -12,8 +13,8 @@ class UserService(
     private val passwordEncoder: PasswordEncoder
 ): IUserService {
 
-    override fun findByUsername(login: String): User {
-        return this.repository.findByUsername((login))
+    override fun findByLogin(login: String): Mono<User> {
+        return Mono.just(this.repository.findByLogin((login)))
     }
 
     override fun get(id: String): User {

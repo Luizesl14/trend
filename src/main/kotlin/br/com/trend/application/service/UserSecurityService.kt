@@ -2,7 +2,6 @@ package br.com.trend.application.service
 
 import br.com.trend.application.shared.dto.jwt.JwtResponse
 import br.com.trend.application.shared.dto.jwt.LoginRequest
-import br.com.trend.application.shared.dto.user.UserSecurity
 import br.com.trend.application.shared.service.IAuthService
 import br.com.trend.application.shared.service.IUserService
 import br.com.trend.infrastructure.jwt.JwtTokenUtil
@@ -11,7 +10,6 @@ import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.stereotype.Service
 
 @Service
@@ -19,7 +17,6 @@ class UserSecurityService(
     @Qualifier("userService")
     private val service: IUserService,
     private val authenticationManager: ReactiveAuthenticationManager,
-    private val userDetailsService: ReactiveUserDetailsService,
     private val jwtTokenUtil: JwtTokenUtil
 ): IAuthService {
 
@@ -31,7 +28,7 @@ class UserSecurityService(
             )
 
             val authentication = this.authenticationManager.authenticate(authenticationToken).awaitSingle()
-            val userDetails = this.userDetailsService.findByUsername(request.login).awaitSingle()
+            val userDetails = this.service.findByLogin(request.login).awaitSingle()
             val token = this.jwtTokenUtil.generateToken(userDetails)
 
             JwtResponse(token)

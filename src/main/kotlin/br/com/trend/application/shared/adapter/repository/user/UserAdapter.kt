@@ -10,8 +10,8 @@ class UserAdapter(
     private val  repo : ISpringUserRepository
 ): IUserPort {
 
-    override fun findByUsername(login: String): User {
-        return this.repo.findByLogin(login);
+    override fun findByLogin(login: String): User {
+        return this.repo.findByLogin(login)
     }
 
     override fun findById(id: String): User {
