@@ -1,14 +1,14 @@
 package br.com.trend.application.shared.adapter.repository.customer
 
-import br.com.trend.application.shared.ports.ICustomerRepositoryPort
+import br.com.trend.application.shared.ports.ICustomerPort
 import br.com.trend.infrastructure.repository.ISpringCustomerRepository
 import br.com.trend.model.customer.Customer
 import org.springframework.stereotype.Component
 
 @Component
-class CustomerRepositoryAdapter(
+class CustomerAdapter(
     private val  repo : ISpringCustomerRepository
-): ICustomerRepositoryPort {
+): ICustomerPort {
 
     override fun findById(id: String): Customer {
         return this.repo.findById(id)

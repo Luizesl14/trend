@@ -1,6 +1,6 @@
 package br.com.trend.infrastructure.adapter
 
-interface IRepositoryPort<T>{
+interface IPort<T>{
 
     fun findById(id: String): T
     fun findAll(): MutableSet<T>

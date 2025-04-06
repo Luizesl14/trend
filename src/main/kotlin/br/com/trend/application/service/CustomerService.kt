@@ -1,32 +1,33 @@
 package br.com.trend.application.service
 
-import br.com.trend.application.shared.adapter.ICustomerRepositoryPort
+import br.com.trend.application.shared.ports.ICustomerPort
 import br.com.trend.model.customer.Customer
+import br.com.trend.application.shared.service.ICustomerService
 import org.springframework.stereotype.Service
 
 
 @Service
 class CustomerService(
-    private val repository: ICustomerRepositoryPort
+    private val repository: ICustomerPort
 ): ICustomerService {
 
-    override fun getCustomer(id: String): Customer {
+    override fun get(id: String): Customer {
         return this.repository.findById(id);
     }
 
-    override fun getCustomers(): MutableSet<Customer> {
+    override fun getAll(): MutableSet<Customer> {
         return this.repository.findAll();
     }
 
-    override fun setCustomer(customer: Customer): Customer {
-        return this.repository.save(customer);
+    override fun setEntity(entity: Customer): Customer {
+        return this.repository.save(entity);
     }
 
-    override fun updateCustomer(customer: Customer): Customer {
-        return this.repository.update(customer);
+    override fun update(entity: Customer): Customer {
+        return this.repository.update(entity);
     }
 
-    override fun deleteCustomer(id: String) {
+    override fun delete(id: String) {
         this.repository.delete(id);
     }
 

@@ -1,40 +1,47 @@
 package br.com.trend.application.service
 
-import br.com.trend.application.shared.ports.IUserRepositoryPort
-import br.com.trend.model.user.User
+import br.com.trend.application.shared.dto.jwt.JwtResponse
+import br.com.trend.application.shared.dto.jwt.LoginRequest
+import br.com.trend.application.shared.dto.user.UserSecurity
+import br.com.trend.application.shared.service.IAuthService
 import br.com.trend.application.shared.service.IUserService
-import org.springframework.security.crypto.password.PasswordEncoder
+import br.com.trend.infrastructure.jwt.JwtTokenUtil
+import br.com.trend.model.user.User
+import kotlinx.coroutines.reactive.awaitSingle
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.security.authentication.ReactiveAuthenticationManager
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(
-    private val repository: IUserRepositoryPort,
-    private val passwordEncoder: PasswordEncoder
-): IUserService {
+class UserSecurityService(
+    @Qualifier("userService")
+    private val service: IUserService,
+    private val authenticationManager: ReactiveAuthenticationManager,
+    private val userDetailsService: ReactiveUserDetailsService,
+    private val jwtTokenUtil: JwtTokenUtil
+): IAuthService {
 
-    override fun findByUsername(login: String): User {
-        return this.repository.findByUsername((login))
+
+    override suspend fun login(request: LoginRequest): JwtResponse {
+        return try {
+            val authenticationToken = UsernamePasswordAuthenticationToken(
+                request.login, request.password
+            )
+
+            val authentication = this.authenticationManager.authenticate(authenticationToken).awaitSingle()
+            val userDetails = this.userDetailsService.findByUsername(request.login).awaitSingle()
+            val token = this.jwtTokenUtil.generateToken(userDetails)
+
+            JwtResponse(token)
+        } catch (e: Exception) {
+            throw e
+        }
     }
 
-    override fun getCustomer(id: String): User {
-        return this.repository.findById(id);
+    override suspend fun register(user: User): User {
+        return this.service.setEntity(user)
     }
 
-    override fun getCustomers(): MutableSet<User> {
-        TODO("Not yet implemented")
-    }
-
-    override fun setCustomer(entity: User): User {
-        val encodedPassword = passwordEncoder.encode(entity.password)
-        entity.login = encodedPassword;
-        return repository.save(entity);
-    }
-
-    override fun updateCustomer(entity: User): User {
-        TODO("Not yet implemented")
-    }
-
-    override fun deleteCustomer(id: String) {
-        TODO("Not yet implemented")
-    }
 }

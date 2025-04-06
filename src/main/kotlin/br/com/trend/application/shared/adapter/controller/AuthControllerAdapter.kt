@@ -1,40 +1,26 @@
 package br.com.trend.application.shared.adapter.controller
 
-import br.com.trend.application.shared.service.ICustomerService
-import br.com.trend.application.shared.mapper.ICustomerMapper
-import br.com.trend.application.shared.ports.ICustomerControllerPort
-import br.com.trend.model.customer.Customer
-import br.com.trend.model.customer.CustomerDTO
+import br.com.trend.application.shared.dto.jwt.JwtResponse
+import br.com.trend.application.shared.dto.jwt.LoginRequest
+import br.com.trend.application.shared.mapper.IUserMapper
+import br.com.trend.application.shared.ports.IAuthControllerPort
+import br.com.trend.application.shared.service.IAuthService
+import br.com.trend.model.user.User
+import br.com.trend.model.user.UserDTO
 import org.springframework.stereotype.Component
 
 @Component
-class CustomControllerAdapter(
-    private val  service : ICustomerService,
-    private val mapper: ICustomerMapper
-): ICustomerControllerPort {
+class AuthControllerAdapter(
+    private val  service : IAuthService,
+    private val map: IUserMapper
+): IAuthControllerPort {
 
-    override fun findById(id: String): CustomerDTO {
-        val customer: Customer = this.service.get(id)
-        return mapper.toDTO(customer)
+    override suspend fun login(request: LoginRequest): JwtResponse {
+        return this.service.login(request)
     }
 
-    override fun findAll(): MutableSet<CustomerDTO> {
-        val customers: MutableSet<Customer> = this.service.getAll();
-        return this.mapper.toDTOs(customers)
+    override suspend fun register(userDTO: UserDTO): UserDTO {
+        val user: User = this.service.register(this.map.toEntity(userDTO));
+       return this.map.toDTO(user);
     }
-
-    override fun save(customerDTO: CustomerDTO): CustomerDTO {
-        val customer: Customer = this.mapper.toEntity(customerDTO)
-        return this.mapper.toDTO(this.service.setEntity(customer))
-    }
-
-    override fun update(customerDTO: CustomerDTO): CustomerDTO {
-        val customer: Customer = this.mapper.toEntity(customerDTO)
-        return this.mapper.toDTO(this.service.update(customer))
-    }
-
-    override fun delete(id: String) {
-        this.service.delete(id)
-    }
-
 }

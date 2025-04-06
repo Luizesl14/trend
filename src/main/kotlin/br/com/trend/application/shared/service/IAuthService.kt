@@ -1,12 +1,10 @@
-package br.com.trend.presentation.api
+package br.com.trend.application.shared.service
 
 import br.com.trend.application.shared.dto.jwt.JwtResponse
 import br.com.trend.application.shared.dto.jwt.LoginRequest
 import br.com.trend.model.user.User
-import org.springframework.http.ResponseEntity
 
-interface IAuthController {
-
-    suspend fun login(request: LoginRequest): ResponseEntity<JwtResponse>
-    suspend fun register(user: User): ResponseEntity<User>
+interface IAuthService {
+    suspend fun login(request: LoginRequest): JwtResponse
+    suspend fun register(user: User): User
 }

@@ -1,6 +1,19 @@
 spring:
   application:
-    name: Trent
+    name: Trend
+
+  data:
+    mongodb:
+      uri: mongodb://root:trend@localhost:27017/trend_app?authSource=admin
+      auto-index-creation: true
+  mongodb:
+    embedded:
+      version: 4.0.21
+
+# Opcional - Logging para verificar o que está acontecendo
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
 
 jwt:
   secret: suaChaveSecretaMuitoLongaParaAssinarTokensJWT123456789

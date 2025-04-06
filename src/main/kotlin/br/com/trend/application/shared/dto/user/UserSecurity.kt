@@ -1,7 +1,7 @@
 package br.com.trend.application.shared.dto.user
 
 import br.com.trend.model.user.User
-import br.com.trend.model.vo.IUserDetail
+import br.com.trend.application.shared.service.IUserDetail
 import org.bson.types.ObjectId
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority

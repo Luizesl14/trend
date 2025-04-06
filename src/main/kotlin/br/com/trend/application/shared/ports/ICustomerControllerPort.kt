@@ -1,7 +1,7 @@
-package br.com.trend.application.shared.adapter.controller
+package br.com.trend.application.shared.ports
 
-import br.com.trend.infrastructure.repository.IRepositoryPort
+import br.com.trend.infrastructure.adapter.IPort
 import br.com.trend.model.customer.CustomerDTO
 
-interface ICustomerControllerPort: IRepositoryPort<CustomerDTO> {
+interface ICustomerControllerPort: IPort<CustomerDTO> {
 }

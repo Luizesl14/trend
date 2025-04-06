@@ -1,8 +1,8 @@
 package br.com.trend.presentation.controller
 
-import br.com.trend.application.shared.adapter.ICustomerControllerPort
+import br.com.trend.application.shared.ports.ICustomerControllerPort
 import br.com.trend.model.customer.CustomerDTO
-import br.com.trend.model.vo.ICrudController
+import br.com.trend.presentation.api.ICrudController
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: trend
+      MONGO_INITDB_DATABASE: trend_app
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    restart: always
+    ports:
+      - "8084:8084"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: trend
+      ME_CONFIG_MONGODB_URL: mongodb://root:trend@mongodb:27017/
+    networks:
+      - app-network
+    depends_on:
+      - mongodb
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

@@ -1,4 +1,4 @@
-package br.com.trend.application.shared.adapter.service
+package br.com.trend.application.shared.service
 
 import br.com.trend.model.customer.Customer
 

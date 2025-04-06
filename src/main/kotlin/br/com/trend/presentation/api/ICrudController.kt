@@ -1,4 +1,4 @@
-package br.com.trend.model.vo
+package br.com.trend.presentation.api
 
 import org.springframework.http.ResponseEntity
 

@@ -1,7 +1,12 @@
 package br.com.trend.application.shared.ports
 
-import br.com.trend.infrastructure.adapter.IRepositoryPort
-import br.com.trend.model.customer.CustomerDTO
+import br.com.trend.application.shared.dto.jwt.JwtResponse
+import br.com.trend.application.shared.dto.jwt.LoginRequest
+import br.com.trend.model.user.UserDTO
 
-interface ICustomerControllerPort: IRepositoryPort<CustomerDTO> {
+interface IAuthControllerPort {
+
+    suspend fun login(request: LoginRequest): JwtResponse
+    suspend fun register(userDTO: UserDTO): UserDTO
+
 }
