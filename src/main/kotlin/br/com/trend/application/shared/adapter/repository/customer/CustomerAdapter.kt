@@ -1,7 +1,8 @@
-package br.com.trend.application.shared.adapter
+package br.com.trend.application.shared.adapter.repository.customer
 
-import br.com.trend.model.customer.Customer
+import br.com.trend.application.shared.ports.ICustomerRepositoryPort
 import br.com.trend.infrastructure.repository.ISpringCustomerRepository
+import br.com.trend.model.customer.Customer
 import org.springframework.stereotype.Component
 
 @Component
@@ -18,12 +19,12 @@ class CustomerRepositoryAdapter(
        return this.repo.findAll().toMutableSet();
     }
 
-    override fun save(customer: Customer): Customer {
-        return this.repo.save(customer);
+    override fun save(entity: Customer): Customer {
+        return this.repo.save(entity);
     }
 
-    override fun update(customer: Customer): Customer {
-       return this.repo.save(customer);
+    override fun update(entity: Customer): Customer {
+       return this.repo.save(entity);
     }
 
     override fun delete(id: String) {

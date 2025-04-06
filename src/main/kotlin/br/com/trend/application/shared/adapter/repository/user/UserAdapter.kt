@@ -1,0 +1,39 @@
+package br.com.trend.application.shared.adapter.repository.user
+
+import br.com.trend.application.shared.ports.IUserRepositoryPort
+import br.com.trend.infrastructure.repository.ISpringUserRepository
+import br.com.trend.model.user.User
+import org.springframework.stereotype.Component
+import reactor.core.publisher.Mono
+
+@Component
+class UserRepositoryAdapter(
+    private val  repo : ISpringUserRepository
+): IUserRepositoryPort {
+
+    override fun findByUsername(login: String): User {
+        return this.repo.findByLogin(login);
+    }
+
+    override fun findById(id: String): User {
+        return this.repo.findById(id)
+            .orElseThrow { NoSuchElementException("Entidade não encontrada com id: $id") }
+    }
+
+    override fun findAll(): MutableSet<User> {
+       return this.repo.findAll().toMutableSet();
+    }
+
+    override fun save(entity: User): User {
+        return this.repo.save(entity);
+    }
+
+    override fun update(entity: User): User {
+       return this.repo.save(entity);
+    }
+
+    override fun delete(id: String) {
+        this.repo.deleteById(id)
+    }
+
+}

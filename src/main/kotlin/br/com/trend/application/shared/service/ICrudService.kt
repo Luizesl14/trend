@@ -1,10 +1,10 @@
-package br.com.trend.model.vo
+package br.com.trend.application.shared.adapter.service
 
 interface ICrudService<T> {
 
     fun getCustomer(id: String): T
     fun getCustomers(): MutableSet<T>
-    fun setCustomer(customer: T): T
-    fun updateCustomer(customer: T): T
+    fun setCustomer(entity: T): T
+    fun updateCustomer(entity: T): T
     fun deleteCustomer(id: String)
 }

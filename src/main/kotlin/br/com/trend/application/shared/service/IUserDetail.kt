@@ -1,4 +1,4 @@
-package br.com.trend.model.vo
+package br.com.trend.application.shared.adapter.service
 
 import org.springframework.security.core.userdetails.UserDetails
 
