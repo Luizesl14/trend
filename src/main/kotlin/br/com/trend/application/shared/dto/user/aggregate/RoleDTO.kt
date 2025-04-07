@@ -6,8 +6,8 @@ import org.bson.types.ObjectId
 
 data class RoleDTO(
 
-    val id: ObjectId,
-    val name: String,
+    val id: ObjectId? = null,
+    val name: String? = null,
     val isActive: Boolean = false,
     val user: UserDTO? = null
 
