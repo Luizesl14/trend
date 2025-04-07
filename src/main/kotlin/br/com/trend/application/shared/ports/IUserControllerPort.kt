@@ -1,7 +1,7 @@
 package br.com.trend.application.shared.ports
 
 import br.com.trend.infrastructure.port.IPort
-import br.com.trend.model.customer.CustomerDTO
+import br.com.trend.model.user.UserDTO
 
-interface ICustomerControllerPort: IPort<CustomerDTO> {
+interface IUserControllerPort: IPort<UserDTO> {
 }

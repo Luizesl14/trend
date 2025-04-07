@@ -5,7 +5,12 @@ import br.com.trend.model.customer.CustomerDTO
 import org.mapstruct.Mapper
 
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",  uses =
+    [IRoleMapper::class,
+    IPersonaMapper::class,
+    IAddressMapper::class,
+    IPhoneMapper::class]
+)
 interface ICustomerMapper {
 
     fun toEntity(dto: CustomerDTO): Customer

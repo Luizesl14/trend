@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails
 class User(
 
     @Id
-    val id: ObjectId = ObjectId(),
+    val id: ObjectId?= ObjectId(),
 
     @Indexed(unique = true, name = "login_index")
     @Field("login")
@@ -28,13 +28,13 @@ class User(
     val email: String,
 
     @Field("password")
-    val pass: String,
+    var pass: String,
 
     @DBRef
-    val roles: Set<Role> = setOf(),
+    var roles: Set<Role> = setOf(),
 
     @Field("is_active")
-    val isActive: Boolean = false,
+    var isActive: Boolean,
 
     @DBRef
     val customer: Customer? = null

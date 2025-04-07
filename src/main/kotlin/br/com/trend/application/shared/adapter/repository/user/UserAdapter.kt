@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class UserAdapter(
-    private val  repo : ISpringUserRepository
+    private val  repo : ISpringUserRepository,
 ): IUserPort {
 
     override fun findByLogin(login: String): User {
@@ -24,7 +24,8 @@ class UserAdapter(
     }
 
     override fun save(entity: User): User {
-        return this.repo.save(entity);
+        return repo.save(entity)
+
     }
 
     override fun update(entity: User): User {

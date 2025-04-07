@@ -39,7 +39,8 @@ class SecurityConfig(
             .cors { it.configurationSource(corsConfigurationSource()) }
             .authorizeExchange { exchanges ->
                 exchanges
-                    .pathMatchers("/api/auth/**").permitAll()
+//                    .pathMatchers("/api/v1/user/**").permitAll()
+                    .pathMatchers("/api/v1/auth/**").permitAll()
                     .pathMatchers("/api/public/**").permitAll()
                     .pathMatchers("/api/admin/**").hasRole("ADMIN")
                     .anyExchange().authenticated()

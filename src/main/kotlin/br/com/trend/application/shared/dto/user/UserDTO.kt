@@ -1,16 +1,15 @@
 package br.com.trend.model.user
 
-import br.com.trend.model.customer.CustomerDTO
-import br.com.trend.model.user.aggregate.Role
+import br.com.trend.model.user.aggregate.RoleDTO
 import org.bson.types.ObjectId
 
 
-data class UserDTO(
+data class UserDTO (
 
-    val id: ObjectId,
-    val login: String,
-    val email: String,
-    val password: String,
-    val roles: Set<Role> = emptySet(),
-    val customer: CustomerDTO? = null
+    var id: ObjectId? = null,
+    var login: String? = null,
+    var email: String? = null,
+    var pass: String? = null,
+    var roles: Set<RoleDTO> = emptySet(),
+    val isActive: Boolean = true
 )

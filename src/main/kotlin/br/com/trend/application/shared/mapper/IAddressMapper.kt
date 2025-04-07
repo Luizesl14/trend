@@ -1,11 +1,11 @@
 package br.com.trend.application.shared.mapper
 
-import br.com.trend.model.persona.Persona
-import br.com.trend.model.persona.PersonaDTO
+import br.com.trend.model.customer.aggregate.Address
+import br.com.trend.model.customer.aggregate.AddressDTO
 import org.mapstruct.Mapper
 
 @Mapper(componentModel = "spring")
-interface IPersonaMapper {
-    fun toDTO(role: Persona): PersonaDTO
-    fun toEntity(dto: PersonaDTO): Persona
+interface IAddressMapper {
+    fun toDTO(role: Address): AddressDTO
+    fun toEntity(dto: AddressDTO): Address
 }

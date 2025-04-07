@@ -11,6 +11,5 @@ data class PersonaDTO(
     val lastName: String,
     val fullName: String,
     val state: String,
-    val zipCode: String,
-    val customer: CustomerDTO? = null
+    val zipCode: String
 )

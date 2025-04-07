@@ -1,5 +1,6 @@
 package br.com.trend.infrastructure.jwt
 
+import br.com.trend.application.shared.dto.jwt.Token
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
@@ -16,19 +17,22 @@ class JwtTokenUtil {
     @Value("\${jwt.expiration}")
     private var expiration: Long = 86400000 // 24 horas
 
-    fun generateToken(userDetails: UserDetails): String {
+    fun generateToken(userDetails: UserDetails): Token {
         val claims: Map<String, Any> = hashMapOf(
             "roles" to (userDetails.authorities.map { it.authority })
         )
 
-        return Jwts.builder()
+        var token = Jwts.builder()
             .setClaims(claims)
             .setSubject(userDetails.username)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + expiration))
             .signWith(Keys.hmacShaKeyFor(secret.toByteArray()))
-            .compact()
+            .compact();
+        return Token("Bearer", token, expiration.toString())
     }
+
+
 
     fun getUsernameFromToken(token: String): String {
         val claims = getAllClaimsFromToken(token)

@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 class Address (
 
         @Id
-        val id: ObjectId = ObjectId(),
+        val id: ObjectId? = ObjectId(),
 
         @Field("street")
         val street: String,

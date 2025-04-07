@@ -1,41 +1,41 @@
-package br.com.trend.application.shared.adapter.repository.user
+package br.com.trend.application.shared.adapter.controller
 
-import br.com.trend.application.shared.ports.IRolePort
-import br.com.trend.application.shared.ports.IUserPort
-import br.com.trend.infrastructure.repository.ISpringRoleRepository
-import br.com.trend.infrastructure.repository.ISpringUserRepository
-import br.com.trend.model.user.User
+import br.com.trend.application.shared.mapper.IRoleMapper
+import br.com.trend.application.shared.ports.IRoleControllerPort
+import br.com.trend.application.shared.service.IRoleService
 import br.com.trend.model.user.aggregate.Role
+import br.com.trend.model.user.aggregate.RoleDTO
 import org.springframework.stereotype.Component
 
 @Component
-class RoleAdapter(
-    private val  repo : ISpringRoleRepository
-): IRolePort {
+class RoleControllerAdapter(
+    private val  service : IRoleService,
+    private val map : IRoleMapper
+): IRoleControllerPort {
 
-    override fun findByLogin(login: String): Role {
-        return this.repo.findByName((login))
+    override fun findById(id: String): RoleDTO {
+        val role: Role = this.service.get(id)
+        return this.map.toDTO(role)
     }
 
-    override fun findById(id: String): Role {
-        return this.repo.findById(id)
-            .orElseThrow { NoSuchElementException("Entidade não encontrada com id: $id") }
+    override fun findAll(): MutableSet<RoleDTO> {
+        val roles: MutableSet<Role> = this.service.getAll();
+        return this.map.toDTOs(roles)
     }
 
-    override fun findAll(): MutableSet<Role> {
-       return this.repo.findAll().toMutableSet();
+    override fun save(entity: RoleDTO): RoleDTO {
+        val role: Role = this.map.toEntity(entity)
+        var roleDTO = this.map.toDTO(this.service.setEntity(role));
+        return roleDTO;
     }
 
-    override fun save(entity: Role): Role {
-        return this.repo.save(entity);
-    }
-
-    override fun update(entity: Role): Role {
-       return this.repo.save(entity);
+    override fun update(entity: RoleDTO): RoleDTO {
+        val role: Role = this.map.toEntity(entity)
+        return this.map.toDTO(this.service.update(role))
     }
 
     override fun delete(id: String) {
-        this.repo.deleteById(id)
+        this.service.delete(id)
     }
 
 }

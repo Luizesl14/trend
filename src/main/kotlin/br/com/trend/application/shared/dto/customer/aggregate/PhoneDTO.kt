@@ -11,7 +11,6 @@ data class PhoneDTO(
     val first: String,
     val last: String,
     val isPrimary: Boolean = false,
-    val isWhatsapp: Boolean = false,
-    val customer: CustomerDTO? = null
+    val isWhatsapp: Boolean = false
 
 )

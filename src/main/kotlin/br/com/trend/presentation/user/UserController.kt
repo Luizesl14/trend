@@ -1,8 +1,6 @@
-package br.com.trend.presentation.controller
+package br.com.trend.presentation.user
 
-import br.com.trend.application.shared.ports.ICustomerControllerPort
 import br.com.trend.application.shared.ports.IUserControllerPort
-import br.com.trend.model.customer.CustomerDTO
 import br.com.trend.model.user.UserDTO
 import br.com.trend.presentation.api.ICrudController
 import org.springframework.http.HttpStatus
@@ -22,7 +20,7 @@ class UserController(
         return ResponseEntity.status(HttpStatus.OK).body(this.adapter.findById(id))
     }
 
-    @GetMapping("/customers")
+    @GetMapping("/users")
     override fun getAll(): ResponseEntity<MutableSet<UserDTO>> {
         return  ResponseEntity.status(HttpStatus.OK).body(this.adapter.findAll().toMutableSet())
     }

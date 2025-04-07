@@ -5,7 +5,7 @@ import br.com.trend.model.user.UserDTO
 import org.mapstruct.Mapper
 
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",  uses = [IRoleMapper::class])
 interface IUserMapper {
 
     fun toEntity(dto: UserDTO): User

@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 class Persona(
 
     @Id
-    val id: ObjectId = ObjectId(),
+    val id: ObjectId? = ObjectId(),
 
     @Field("first_name")
     val firstName: String,

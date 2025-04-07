@@ -1,10 +1,11 @@
 package br.com.trend.infrastructure.repository
 
-import br.com.trend.model.user.User
+import br.com.trend.model.user.aggregate.Role
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ISpringUserRepository : MongoRepository<User, String> {
-    fun findByLogin(login: String): User
+interface ISpringRoleRepository : MongoRepository<Role, String> {
+    fun findByName(name: String): Role
+
 }

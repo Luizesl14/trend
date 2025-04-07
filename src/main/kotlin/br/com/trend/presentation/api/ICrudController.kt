@@ -4,9 +4,9 @@ import org.springframework.http.ResponseEntity
 
 interface ICrudController<S, T> {
 
-    fun getCustomer(id: String): ResponseEntity<T>
-    fun getCustomers(): ResponseEntity<MutableSet<T>>
-    fun setCustomer(customerDTO: S): ResponseEntity<T>
-    fun updateCustomer(customerDTO: S): ResponseEntity<T>
-    fun deleteCustomer(id: String): ResponseEntity<Void>
+    fun get(id: String): ResponseEntity<T>
+    fun getAll(): ResponseEntity<MutableSet<T>>
+    fun set(dto: S): ResponseEntity<T>
+    fun update(dto: S): ResponseEntity<T>
+    fun delete(id: String): ResponseEntity<Void>
 }

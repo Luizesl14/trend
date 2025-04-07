@@ -22,12 +22,12 @@ class UserService(
     }
 
     override fun getAll(): MutableSet<User> {
-        TODO("Not yet implemented")
+        return this.repository.findAll().toMutableSet();
     }
 
     override fun setEntity(entity: User): User {
         val encodedPassword = passwordEncoder.encode(entity.password)
-        entity.login = encodedPassword;
+        entity.pass = encodedPassword;
         return repository.save(entity);
     }
 

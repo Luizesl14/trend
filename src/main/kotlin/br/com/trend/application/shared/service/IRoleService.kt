@@ -1,10 +1,8 @@
 package br.com.trend.application.shared.service
 
-import br.com.trend.model.user.User
-import reactor.core.publisher.Mono
+import br.com.trend.model.user.aggregate.Role
 
-interface IUserService: ICrudService<User> {
+interface IRoleService: ICrudService<Role> {
 
-    fun findByLogin(login: String): Mono<User>
 
 }

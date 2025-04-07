@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 class Role(
 
     @Id
-    val id: ObjectId = ObjectId(),
+    val id: ObjectId? = ObjectId(),
 
     @Field("name")
     val name: String,

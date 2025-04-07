@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document
  class Customer(
 
    @Id
-   val id: ObjectId = ObjectId(),
+   val id: ObjectId? = ObjectId(),
 
    @DBRef
     val persona: MutableSet<Persona> = mutableSetOf(),

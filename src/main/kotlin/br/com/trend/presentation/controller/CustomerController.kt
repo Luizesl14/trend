@@ -16,27 +16,27 @@ class CustomerController(
 
 
     @GetMapping("/{id}")
-    override fun getCustomer(@PathVariable("id") id: String): ResponseEntity<CustomerDTO> {
+    override fun get(@PathVariable("id") id: String): ResponseEntity<CustomerDTO> {
         return ResponseEntity.status(HttpStatus.OK).body(this.adapter.findById(id))
     }
 
     @GetMapping("/customers")
-    override fun getCustomers(): ResponseEntity<MutableSet<CustomerDTO>> {
+    override fun getAll(): ResponseEntity<MutableSet<CustomerDTO>> {
         return  ResponseEntity.status(HttpStatus.OK).body(this.adapter.findAll().toMutableSet())
     }
 
     @PostMapping("/set")
-    override fun setCustomer(@RequestBody customerDTO: CustomerDTO): ResponseEntity<CustomerDTO> {
-        return  ResponseEntity.status(HttpStatus.CREATED).body(this.adapter.save(customerDTO))
+    override fun set(@RequestBody dto: CustomerDTO): ResponseEntity<CustomerDTO> {
+        return  ResponseEntity.status(HttpStatus.CREATED).body(this.adapter.save(dto))
     }
 
     @PutMapping("/change")
-    override fun updateCustomer(@RequestBody customerDTO: CustomerDTO): ResponseEntity<CustomerDTO> {
-        return  ResponseEntity.status(HttpStatus.OK).body(this.adapter.update(customerDTO))
+    override fun update(@RequestBody dto: CustomerDTO): ResponseEntity<CustomerDTO> {
+        return  ResponseEntity.status(HttpStatus.OK).body(this.adapter.update(dto))
     }
 
     @DeleteMapping("/{id}")
-    override fun deleteCustomer( @PathVariable("id") id: String): ResponseEntity<Void> {
+    override fun delete( @PathVariable("id") id: String): ResponseEntity<Void> {
         this.adapter.delete(id);
         return  ResponseEntity.status(HttpStatus.OK).build();
     }

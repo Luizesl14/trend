@@ -1,9 +1,8 @@
 package br.com.trend.application.shared.ports
 
 import br.com.trend.infrastructure.port.IPort
-import br.com.trend.model.user.aggregate.Role
+import br.com.trend.model.user.aggregate.RoleDTO
 
-interface IRolePort: IPort<Role> {
+interface IRoleControllerPort: IPort<RoleDTO> {
 
-    fun findByLogin(login: String): Role
 }
